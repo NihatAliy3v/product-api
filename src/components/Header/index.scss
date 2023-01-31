@@ -1,0 +1,38 @@
+.header {
+  background-color: rgb(97, 84, 84);
+  .container {
+    .row {
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        .logo {
+            display: flex;
+            align-items: center;
+          .logoLink {
+            font-size: 28px;
+            color: red;
+          }
+        }
+        .navList {
+            .navItem {
+              display: flex;
+            .navLink {
+              display: block;
+              padding: 20px 10px;
+              color: #fff;
+            }
+          }
+        }
+        .social {
+            display: flex;
+            align-items: center;
+            .socialLink{
+              font-size: 16px;
+              color: #fff;
+              padding: 0 10px;
+          }
+        }
+      }
+    }
+  }
+}
