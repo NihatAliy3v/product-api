@@ -1,31 +1,49 @@
 import React, { useEffect, useState } from "react";
 import "./index.scss";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const Product = () => {
-  const {id} = useParams();
+  const { id } = useParams();
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(()=>{
-    fetch('https://dummyjson.com/products')
-    .then(res => res.json())
-    .then(json => setData(json.products))
-  },[])
-  const findedProduct = data.find((item)=>item.id==id)
-  console.log(findedProduct);
+  useEffect(() => {
+    getData();
+  }, []);
+  const getData = async () => {
+    await axios.get("http://localhost:5000/api/products").then((res) => {
+      setData(res.data);
+      setLoading(false);
+    });
+  };
+
+  const findedProduct = data.find((item) => item.id === id);
+  if (loading) {
+    return <h1>Loading....</h1>;
+  }
   return (
-    <div className='product'>
+    <div className="product">
       <div className="container">
         <div className="row">
           <div className="img">
-            <img src={findedProduct&&findedProduct.images[0]} alt="" />
+            <img
+              src={`http://localhost:5000/${
+                findedProduct && findedProduct.productImage
+              }`}
+              alt=""
+            />
           </div>
-          <div className="content">{findedProduct&&findedProduct.title}</div>
+          <div className="content">
+            <h3>{findedProduct && findedProduct.name}</h3>
+            <p>{findedProduct && findedProduct.details}</p>
+            <p>{findedProduct && findedProduct.price}</p>
+            <p>{findedProduct.featured==="true" && "featured"}</p>
+          </div>
         </div>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default Product
+export default Product;

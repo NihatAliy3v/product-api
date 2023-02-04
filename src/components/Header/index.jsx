@@ -21,14 +21,24 @@ const Header = () => {
                 <Link className="navLink" to="/products">
                   Products
                 </Link>
-                
+                <Link className="navLink" to="/createProduct">
+                  Create
+                </Link>
               </li>
             </ul>
             <div className="social">
-              <Link className="socialLink" to="">Instagram</Link>
-              <Link className="socialLink" to="">Facebook</Link>
-              <Link className="socialLink" to="">Linkedin</Link>
-              <Link className="socialLink" to="">Twitter</Link>
+              <Link className="socialLink" to="">
+                Instagram
+              </Link>
+              <Link className="socialLink" to="">
+                Facebook
+              </Link>
+              <Link className="socialLink" to="">
+                Linkedin
+              </Link>
+              <Link className="socialLink" to="">
+                Twitter
+              </Link>
             </div>
           </div>
         </div>

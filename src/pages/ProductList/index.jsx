@@ -1,29 +1,38 @@
 import React, { useEffect, useState } from "react";
 import "./index.scss";
 import Card from "../../components/Card";
+import axios from "axios";
 
 const ProductList = () => {
   const [data, setData] = useState([]);
-
-  useEffect(()=>{
-    fetch('https://dummyjson.com/products')
-    .then(res => res.json())
-    .then(json => setData(json.products))
-  },[])
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    getData();
+  }, []);
+  const getData = async () => {
+    await axios.get("http://localhost:5000/api/products")
+    .then((res) => {
+      setData(res.data);
+      setLoading(false);
+    });
+  };
+  if (loading) {
+    return <h1>Loading....</h1>;
+  }
   return (
     <div className="products">
       <div className="container">
         <div className="row">
-          <h2 className="title">
-            Products
-          </h2>
+          <h2 className="title">Products</h2>
           <div className="productContainer">
             {data.map((item) => (
               <Card
                 key={item.id}
-                photo={item.images[0]}
+                photo={`http://localhost:5000/${item.productImage}`}
                 id={item.id}
-                title={item.title}
+                name={item.name}
+                details={item.details}
+                featured={item.featured}
               />
             ))}
           </div>
