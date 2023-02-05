@@ -1,12 +1,24 @@
+//Fonts
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+//Reset
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
-}
+    font-family: 'Open Sans', sans-serif;
 
+}
 .container{
     width: 1140px;
     margin: auto;
+}
+
+body{
+    width: 100%;
+    height: 100%;
+    background: rgb(67,25,126);
+    background: linear-gradient(45deg, rgba(67,25,126,1) 11%, rgba(157,0,156,1) 89%, rgba(200,92,142,1) 100%);
+    background-attachment: fixed;
 }

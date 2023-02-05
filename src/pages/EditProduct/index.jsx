@@ -1,13 +1,25 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import "./index.scss";
-
-const CreateProduct = () => {
+const EditProduct = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [details, setDetails] = useState("");
   const [featured, setFeatured] = useState(false);
   const [productImage, setProductImage] = useState(null);
+  const { id } = useParams();
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/products/${id}`).then((res) => {
+      const { name, price, details, productImage, featured } = res.data;
+      setName(name);
+      setPrice(price);
+      setDetails(details);
+      setProductImage(`http://localhost:5000/${productImage}`);
+      setFeatured(featured);
+    });
+  }, [id]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -17,7 +29,7 @@ const CreateProduct = () => {
     formData.append("featured", featured);
     formData.append("details", details);
 
-    axios.post("http://localhost:5000/api/products", formData);
+    axios.put(`http://localhost:5000/api/products/${id}`, formData);
   };
 
   return (
@@ -62,4 +74,4 @@ const CreateProduct = () => {
   );
 };
 
-export default CreateProduct;
+export default EditProduct;

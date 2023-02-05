@@ -9,13 +9,17 @@ const ProductList = () => {
   useEffect(() => {
     getData();
   }, []);
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:5000/api/products/${id}`)
+    .then((res)=>setData(res.data));
+  };
   const getData = async () => {
-    await axios.get("http://localhost:5000/api/products")
-    .then((res) => {
+    await axios.get("http://localhost:5000/api/products").then((res) => {
       setData(res.data);
       setLoading(false);
     });
   };
+
   if (loading) {
     return <h1>Loading....</h1>;
   }
@@ -33,6 +37,7 @@ const ProductList = () => {
                 name={item.name}
                 details={item.details}
                 featured={item.featured}
+                onClick={()=>handleDelete(item.id)}
               />
             ))}
           </div>
