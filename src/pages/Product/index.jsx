@@ -6,16 +6,12 @@ const Product = () => {
   const { id } = useParams();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
-    getData();
-  }, []);
-  const getData = async () => {
-    await axios.get("http://localhost:5000/api/products").then((res) => {
+    axios.get("http://localhost:5000/api/products").then((res) => {
       setData(res.data);
       setLoading(false);
     });
-  };
+  }, []);
 
   const findedProduct = data.find((item) => item.id === id);
   if (loading) {

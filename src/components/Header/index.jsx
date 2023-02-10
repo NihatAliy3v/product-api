@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./index.scss";
-
 const Header = () => {
   return (
     <header className="header">
@@ -23,6 +22,9 @@ const Header = () => {
                 </Link>
                 <Link className="navLink" to="/createProduct">
                   Create
+                </Link>
+                <Link className="navLink" to="/cart">
+                  Cart
                 </Link>
               </li>
             </ul>
