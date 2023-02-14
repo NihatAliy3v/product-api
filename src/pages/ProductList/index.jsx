@@ -1,31 +1,22 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import "./index.scss";
 import Card from "../../components/Card";
 import axios from "axios";
 import CartContext from "../../CartContext";
 const ProductList = () => {
-  const {addCart} = useContext(CartContext)
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    getData();
-  }, []);
+  const {addCart,data,setData} = useContext(CartContext)
+
+  useEffect(()=>{
+    axios.get("http://localhost:5000/api/products")
+    .then((res)=>setData(res.data))
+  },[setData])
+
   const handleDelete = (id) => {
     axios
       .delete(`http://localhost:5000/api/products/${id}`)
       .then((res) => setData(res.data));
   };
  
-  const getData = async () => {
-    await axios.get("http://localhost:5000/api/products").then((res) => {
-      setData(res.data);
-      setLoading(false);
-    });
-  };
-
-  if (loading) {
-    return <h1>Loading....</h1>;
-  }
   return (
     <div className="products">
       <div className="container">
@@ -41,7 +32,7 @@ const ProductList = () => {
                 details={item.details}
                 featured={item.featured}
                 handleDelete={() => handleDelete(item.id)}
-                addToCart={() => addCart(item.id)}
+                onClick={() => addCart(item.id)}
               />
             ))}
           </div>

@@ -7,8 +7,11 @@ const Card = ({
   photo,
   details,
   featured,
+  onClick,
+  count,
+  variant = "add",
+  quantity,
   handleDelete,
-  addToCart,
 }) => {
   return (
     <div className="card-container">
@@ -21,13 +24,23 @@ const Card = ({
             <h3 className="productTitle">{name}</h3>
             <p className="details">{details}</p>
             <p className="featured">{featured === "true" && "featured"}</p>
+            {quantity && <p className="quantity">{quantity}</p>}
           </Link>
-          <button onClick={handleDelete} className="deleteBtn">
-            Delete
-          </button>
-          <button onClick={addToCart} className=" ">
-            Add to Cart
-          </button>
+          {variant === "add" && (
+            <button onClick={onClick} className="addCart">
+              Add to Cart
+            </button>
+          )}
+          {variant === "remove" && (
+            <button onClick={onClick} className="removeCart">
+              Delete to Cart
+            </button>
+          )}
+          {handleDelete && (
+            <button onClick={handleDelete} className="removeCard">
+              Delete
+            </button>
+          )}
         </div>
       </div>
     </div>

@@ -1,5 +1,8 @@
 .header {
   background-color: #9D3C72;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
   .container {
     .row {
       .navbar {

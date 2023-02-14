@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./base.scss";
 import { CartProvider } from "./CartContext";
+import Header from "./components/Header";
 //Pages
 import Home from "./pages/Home";
 import ProductList from "./pages/ProductList";
@@ -13,6 +14,7 @@ function App() {
   return (
     <main className="App">
       <CartProvider>
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<ProductList />} />

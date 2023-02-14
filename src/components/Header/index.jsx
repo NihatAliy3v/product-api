@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import CartContext from "../../CartContext";
 import "./index.scss";
 const Header = () => {
+  const {cart} = useContext(CartContext)
+  const counter = cart.reduce((acc,curr)=> acc+curr.quantity,0)
+
   return (
     <header className="header">
       <div className="container">
@@ -24,7 +28,7 @@ const Header = () => {
                   Create
                 </Link>
                 <Link className="navLink" to="/cart">
-                  Cart
+                  Cart {counter}
                 </Link>
               </li>
             </ul>
